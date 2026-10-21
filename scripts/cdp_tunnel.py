@@ -99,6 +99,58 @@ async def run_page(target, commands, out_png=None):
             print("saved", out_png, os.path.getsize(out_png), "bytes")
 
 
+async def netclick(target, selector):
+    import asyncio as aio
+    url = target["webSocketDebuggerUrl"].replace("ws://127.0.0.1:9222", "")
+    h, p = endpoint()
+    uri = "ws://%s:%d%s" % (h, p, url)
+    import websockets
+    reqs = []
+    async with websockets.connect(uri, additional_headers={"Host": HOSTHDR},
+                                  max_size=64 * 1024 * 1024) as ws:
+        nid = 0
+
+        async def send(method, params=None):
+            nonlocal nid
+            nid += 1
+            await ws.send(json.dumps({"id": nid, "method": method, "params": params or {}}))
+            while True:
+                m = json.loads(await ws.recv())
+                if m.get("id") == nid:
+                    if "error" in m:
+                        raise RuntimeError("%s: %s" % (method, m["error"]))
+                    return m.get("result", {})
+                if m.get("method") == "Network.requestWillBeSent":
+                    r = m["params"]["request"]
+                    reqs.append((m["params"].get("type"), r["method"], r["url"]))
+
+        await send("Network.enable")
+        await send("Runtime.enable")
+        js = ("(() => { const e=document.querySelector(%r); if(!e) return null;"
+              " e.scrollIntoView({block:'center'}); const r=e.getBoundingClientRect();"
+              " return {x:Math.round(r.x+r.width/2), y:Math.round(r.y+r.height/2)}; })()" % selector)
+        res = await send("Runtime.evaluate", {"expression": js, "returnByValue": True})
+        pt = res.get("result", {}).get("value")
+        if not pt:
+            print("no element", selector)
+            return
+        print("click", pt)
+        for t in ("mousePressed", "mouseReleased"):
+            await send("Input.dispatchMouseEvent", {"type": t, "x": pt["x"], "y": pt["y"],
+                                                    "button": "left", "clickCount": 1})
+        end = asyncio.get_event_loop().time() + 8
+        while asyncio.get_event_loop().time() < end:
+            try:
+                m = json.loads(await asyncio.wait_for(ws.recv(), timeout=1.0))
+            except Exception:
+                continue
+            if m.get("method") == "Network.requestWillBeSent":
+                r = m["params"]["request"]
+                reqs.append((m["params"].get("type"), r["method"], r["url"]))
+        for t, meth, u in reqs[-25:]:
+            print(t, meth, u[:160])
+
+
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "tabs"
     tabs = http_get("/json/list")
@@ -142,6 +194,8 @@ def main():
             ("Emulation.setDeviceMetricsOverride", vp),
             ("Page.captureScreenshot", params),
         ], out_png=sys.argv[3]))
+    elif cmd == "netclick":
+        asyncio.run(netclick(target, sys.argv[3]))
     elif cmd == "click":
         js = ("(() => { const e=document.querySelector(%r); if(!e) return 'no-el';"
               " e.scrollIntoView({block:'center'}); const r=e.getBoundingClientRect();"
