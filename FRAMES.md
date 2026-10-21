@@ -26,3 +26,53 @@
 | `ezus-20-podsumowanie.png` | 739696 | `d094f5b48fe7cb7f21559237675446532c4c7a589a9e4c10c6a5dcf868588f79` | Шаг 10: Podsumowanie (PII закрыт) |
 | `ezus-21-podpis.png` | 834021 | `1b3fccaa86a06ab8a5c31fc5dbbd65ea1572b315b253a0d1c440a2481a20fd17` | Шаг 11: модаль выбора метода подписи |
 | `uokik-01-kryteria.png` | 120032 | `80fa21942456a5ad7d8a4169381fcd82d291aa384251d76d733fda3d9bf6dea3` | SUDOP UOKiK: критерии поиска, поле NIP |
+
+## Коды кадров (используются в CHECKLIST-100.md)
+
+Код — сокращение только для чек-листа. В тексте доказательств всегда можно опираться на имя файла.
+
+| Код | Файл |
+|---|---|
+| F01 | `ezus-01-logowanie.png` |
+| F02 | `ezus-02-katalog.png` |
+| F03 | `ezus-03-wakacje.png` |
+| F04 | `ezus-04-rws-start.png` |
+| F05 | `ezus-04-tile-open.png` |
+| F06 | `ezus-05-rws-form.png` |
+| F07 | `ezus-06-rws-step2.png` |
+| F08 | `ezus-07-rws-step3.png` |
+| F09 | `ezus-10-rws-blokada.png` |
+| F13 | `ezus-15-pkd.png` |
+| F14 | `ezus-16-pkd-crop.png` |
+| F16 | `ezus-18-steposwiadczenia.png` |
+| F17 | `ezus-18-stepzalaczniki.png` |
+| F18 | `ezus-20-podsumowanie.png` |
+| F19 | `ezus-21-podpis.png` |
+| F22 | `uokik-01-kryteria.png` |
+
+Коды `F10`, `F11`, `F12`, `F15`, `F20`, `F21` в текущем наборе не используются: они остались
+от ранней редакции чек-листа, когда файлы нумеровались подряд. Ссылки на них заменены именами
+файлов (коммит круга 4). Не считать эти коды доказательством.
+
+## Покрытие по шагам
+
+| Шаг | Кадр | Статус |
+|---|---|---|
+| Вход в eZUS | `ezus-01-logowanie.png` | есть |
+| Каталог, поиск, плитка | `ezus-02-katalog.png`, `ezus-03-wakacje.png`, `ezus-04-rws-start.png`, `ezus-04-tile-open.png` | есть |
+| 1. Informacje ogólne | `ezus-05-rws-form.png`, `ezus-11-rodzaj.png` | есть |
+| 2. Dane płatnika | `ezus-06-rws-step2.png` | есть |
+| 3. Treść wniosku | `ezus-07-rws-step3.png`, `ezus-18-steptresc-wniosku.png`, `ezus-10-rws-blokada.png` (блок дубля) | есть |
+| 4. Oświadczenia | `ezus-18-steposwiadczenia.png` | есть |
+| 5. de minimis ч. 1 | `ezus-15-pkd.png`, `ezus-16-pkd-crop.png`, `ezus-18-steppomoc-de-minimis-c.png` | есть |
+| 6–8. de minimis ч. 2–4 | — | **НЕТ кадров** (описание только в `STEPS-LIVE.md` и в исходном DOCX) |
+| 9. Załączniki | `ezus-18-stepzalaczniki.png` | есть |
+| 10. Podsumowanie | `ezus-20-podsumowanie.png` | есть |
+| 11. Podpis | `ezus-21-podpis.png` | есть |
+| SUDOP UOKiK | `uokik-01-kryteria.png` | есть, но только форма критериев: результата поиска по NIP нет |
+
+Замечания по целостности набора:
+
+- `ezus-18-steppodsumowanie.png` и `ezus-20-podsumowanie.png` — один и тот же файл
+  (SHA-256 `d094f5b4…`). Дубликат оставлен, чтобы не ломать ссылки в чек-листе.
+- `ezus-02-dashboard.png` в доказательствах не используется.
