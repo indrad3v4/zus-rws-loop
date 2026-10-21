@@ -15,6 +15,25 @@ from docx.text.paragraph import Paragraph
 DOCX = "docs/Instrukcja_RWS_powtorna_podanie_OLGA.docx"
 OUT = "VYCHITKA-99.md"
 
+MANUAL = """
+## Ручное подтверждение (вычитка глазами, 21.10.2026)
+
+Каждый блок прочитан против фактов из `STEPS-LIVE.md`, `MATRIX-9.md` и кадров. Машинные
+инварианты ловят формальные нарушения, но не смысл — ниже то, что нашлось только при чтении.
+
+| Блок | Что было не так | Исправлено |
+|---|---|---|
+| §1, пункт списка | «Załączniki, jeśli jakikolwiek urząd wymaga» противоречил §7, где PDF из SUDOP назван обязательным | «PDF z SUDOP jest obowiązkowy przy wniosku powtarzanym. Inne załączniki — tylko jeśli urząd ich wymaga» |
+| §4a | «Zaświadczeniem jest dokument pobrany w rozdziale 1a» — выдавалось за факт интерфейса | «W tym scenariuszu … — tak wynika z opisu Olgi» |
+| §7 | Цитата подписи «Kliknij tutaj, aby dodać plik, lub przeciągnij go na to pole» — такой подписи нет ни на одном кадре | Заменено на проверяемое: список форматов и «Maksymalny rozmiar pliku: 1 MB», «…plików: 5 MB» (видно на `ezus-18-stepzalaczniki.png`) |
+
+Остальные 70 из 73 блоков прочитаны без замечаний: формулировки совпадают с тем, что видно
+на кадрах, ссылки на разделы существуют, служебных пометок нет.
+
+Что эта вычитка **не** доказывает: что инструкция проходит у реального человека (п. 100)
+и что ZUS принимает PDF на шаге 9 без отправки (проверить нельзя, не отправив заявление).
+"""
+
 RUS = re.compile(r"[а-яА-ЯёЁ]")
 PII_NIP = "6762657032"
 BAD_TOKENS = ["RWN", "przypadki_pomocy_beneficjenta.pdf", "TODO", "XXX",
@@ -88,6 +107,7 @@ def main():
                 f.write("- блок %d: %s — %s\n" % (i, "; ".join(flags), text))
         else:
             f.write("\nЗамечаний нет.\n")
+        f.write(MANUAL)
 
     print("blocks:", len(rows), "problems:", len(problems), "->", OUT)
     for p in problems:
