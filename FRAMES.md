@@ -39,6 +39,7 @@
 | `ezus-20-podsumowanie.png` | 739696 | `d094f5b48fe7cb7f21559237675446532c4c7a589a9e4c10c6a5dcf868588f79` | Шаг 10: Podsumowanie (PII закрыт) |
 | `ezus-21-podpis.png` | 834021 | `1b3fccaa86a06ab8a5c31fc5dbbd65ea1572b315b253a0d1c440a2481a20fd17` | Шаг 11: модаль выбора метода подписи |
 | `uokik-01-kryteria.png` | 120032 | `80fa21942456a5ad7d8a4169381fcd82d291aa384251d76d733fda3d9bf6dea3` | SUDOP UOKiK: критерии поиска, поле NIP |
+| `ezus-23-wybor-kontekstu.jpg` | 22230 | `6fd2afab17a3ae22a96c8e10f553cdc5c28c7d84a62c1d1ea5c5c79408bb05cb` | 78: экран после входа через Profil Zaufany — выбор контекста (PESEL и NIP замаскированы до снимка) |
 
 ## Коды кадров (используются в CHECKLIST-100.md)
 
