@@ -23,7 +23,7 @@
 | 5 | Начало заявления, шаг 1 «Informacje ogólne i wybór wniosku» | 10–11 | шаг 1, три варианта рода заявки | F06, `ezus-11-rodzaj.png` | СОВПАДАЕТ | ДА |
 | 6 | «Dane płatnika», «Treść wniosku», «Oświadczenia» | 12–13 | шаги 2, 3, 4; в шаге 4 — пары «nie korzystałem / korzystałem» и «oświadczenie / zaświadczenie» | F07, F08, F16 | СОВПАДАЕТ | ДА (шаги 2, 3, 4) |
 | 7 | De minimis część 1: «Wielkość podmiotu» + «Klasa działalności» с полем PKD | 14–15 | шаг 5: wielkość podmiotu + `Wpisz kod PKD` = 7311Z | F13, F14, `ezus-18-steppomoc-de-minimis-c.png` | СОВПАДАЕТ (в файле — отдельный подраздел, в интерфейсе — тот же шаг 5) | ДА (шаг 5) |
-| 8 | De minimis części 2–4, «Załączniki» с вложением | 16–19, 22 | шаги 6–9, вложения | F17 | СОВПАДАЕТ | ЧАСТИЧНО: шаг 9 есть, шагов 6–8 на кадрах нет |
+| 8 | De minimis części 2–4, «Załączniki» с вложением | 16–19, 22 | шаги 6–9, вложения | F17 | СОВПАДАЕТ | ЧАСТИЧНО, по шагам: 6 — нет, 7 — нет, 8 — нет, 9 — да (`ezus-18-stepzalaczniki.png`) |
 | 9 | «Podsumowanie»: способ получения ответа, вложение `przypadki_pomocy_beneficjenta.pdf` 25,63 KB, RODO; подпись | 23 | шаг 10 + модаль подписи | F18, F19 | СОВПАДАЕТ | ДА (шаги 10 и 11) |
 
 ## Расхождения, которые реально имеют значение
